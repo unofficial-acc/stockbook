@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#0E5E50">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -9,67 +9,72 @@
 <style>
 :root{--bg:#EEF1EF;--card:#fff;--ink:#16211D;--mut:#6B7872;--line:#DDE3E0;--acc:#0E5E50;--accl:#DCEDE8;--up:#C2410C;--dn:#15803D}
 @media(prefers-color-scheme:dark){:root{--bg:#101614;--card:#1A2320;--ink:#EAF0ED;--mut:#93A39C;--line:#2B3733;--acc:#4FC3A9;--accl:#1E3A33;--up:#FB923C;--dn:#4ADE80}}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:clamp(14px,calc(100vw/25.75),30px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media(pointer:fine){html{font-size:16px}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+input{-webkit-user-select:text;user-select:text}
+.two>*,.three>*,.kv>*{min-width:0}
 html,body{margin:0;width:100%;overflow-x:hidden}
-body{background:var(--bg);color:var(--ink);font:15px/1.35 system-ui,Roboto,sans-serif;padding-top:env(safe-area-inset-top)}
-#app{width:100%;margin:0 auto;padding:0 12px 100px}
-@media(pointer:fine){#app{max-width:560px}.sheet{max-width:560px}}
-h1{font-size:22px;margin:14px 2px 10px;letter-spacing:-.4px}
-h2{font-size:16px;margin:18px 2px 8px}
-.sticky{position:sticky;top:env(safe-area-inset-top,0);background:var(--bg);padding:8px 0;z-index:5}
-input,select{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;min-height:50px}
+body{background:var(--bg);color:var(--ink);font:0.9375rem/1.35 system-ui,Roboto,sans-serif;padding-top:env(safe-area-inset-top)}
+#app{width:100%;margin:0 auto;padding:0 0.75rem 6.25rem}
+@media(pointer:fine){#app{max-width:35rem}.sheet{max-width:35rem}}
+h1{font-size:1.375rem;margin:0.875rem 2px 0.625rem;letter-spacing:-.4px}
+h2{font-size:1rem;margin:1.125rem 2px 0.5rem}
+.sticky{position:sticky;top:env(safe-area-inset-top,0);background:var(--bg);padding:0.5rem 0;z-index:5}
+input,select{width:100%;min-width:0;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:0.875rem;padding:0.8125rem 0.875rem;min-height:3.125rem}
 input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
-label{display:block;font-size:12.5px;color:var(--mut);margin:10px 2px 4px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
-.chip{flex:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:9px 14px;font:inherit;min-height:40px}
+label{display:block;font-size:0.78125rem;color:var(--mut);margin:0.625rem 2px 0.25rem}
+.chips{display:flex;gap:0.5rem;overflow-x:auto;padding:0.25rem 0 0.5rem;scrollbar-width:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:6.1875rem;padding:0.5625rem 0.875rem;font:inherit;min-height:2.5rem}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
-.hero{background:var(--acc);color:#fff;border-radius:22px;padding:14px 16px}
-.hero small{opacity:.8;font-size:12px}
-.hero .row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
-.hero b{display:block;font-size:15px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pc{background:var(--card);border-radius:18px;overflow:hidden;cursor:pointer;border:1px solid var(--line);position:relative}
-.im{aspect-ratio:1/.82;background:var(--accl);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:var(--acc);overflow:hidden}
+.hero{background:var(--acc);color:#fff;border-radius:1.375rem;padding:0.875rem 1rem}
+.hero small{opacity:.8;font-size:0.75rem}
+.hero .row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.375rem}
+.hero b{display:block;font-size:0.9375rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0.625rem}
+.pc{background:var(--card);border-radius:1.125rem;overflow:hidden;cursor:pointer;border:1px solid var(--line);position:relative}
+.im{aspect-ratio:1/.82;background:var(--accl);display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:700;color:var(--acc);overflow:hidden}
 .im img{width:100%;height:100%;object-fit:cover;display:block}
-.pc .tx{padding:9px 11px 11px}
+.pc .tx{padding:0.5625rem 0.6875rem 0.6875rem}
 .nm{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ln{display:flex;justify-content:space-between;font-size:13px;color:var(--mut);margin-top:2px}
+.ln{display:flex;justify-content:space-between;font-size:0.8125rem;color:var(--mut);margin-top:2px}
 .ln b{color:var(--ink)}
-.fav{position:absolute;top:6px;left:8px;font-size:19px;color:#F59E0B;text-shadow:0 0 3px #0007}
+.fav{position:absolute;top:0.375rem;left:0.5rem;font-size:1.1875rem;color:#F59E0B;text-shadow:0 0 0.1875rem #0007}
 .up{color:var(--up)}.dn{color:var(--dn)}
-.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kv div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
-.kv small{color:var(--mut);display:block;font-size:12px}
-.kv b{font-size:21px;letter-spacing:-.5px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:0.625rem}
+.kv div{background:var(--card);border:1px solid var(--line);border-radius:0.875rem;padding:0.6875rem 0.8125rem}
+.kv small{color:var(--mut);display:block;font-size:0.75rem}
+.kv b{font-size:1.3125rem;letter-spacing:-.5px}
 .kv .hl{background:var(--acc);color:#fff;border:0}.kv .hl small{color:#ffffffc0}
-.btn{border:0;background:var(--acc);color:#fff;font:inherit;font-weight:650;border-radius:16px;padding:14px;min-height:54px;width:100%;cursor:pointer}
+.btn{border:0;background:var(--acc);color:#fff;font:inherit;font-weight:650;border-radius:1rem;padding:0.875rem;min-height:3.375rem;width:100%;cursor:pointer}
 .btn.sec{background:var(--accl);color:var(--acc)}
 .btn.red{background:none;color:#B91C1C}
-.btn.big{min-height:64px;font-size:18px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:6px 14px;margin-bottom:10px}
-.hist{padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;cursor:pointer}
+.btn.big{min-height:4rem;font-size:1.125rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0.625rem}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:1.125rem;padding:0.375rem 0.875rem;margin-bottom:0.625rem}
+.hist{padding:0.6875rem 0;border-bottom:1px solid var(--line);font-size:0.875rem;cursor:pointer}
 .hist:last-child{border:0}
 .hist .r{display:flex;justify-content:space-between}
 nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
-nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:11px;padding:8px 0 9px;min-height:58px}
-nav button i{display:block;font-style:normal;font-size:21px}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:0.6875rem;padding:0.5rem 0 0.5625rem;min-height:3.625rem}
+nav button i{display:block;font-style:normal;font-size:1.3125rem}
 nav button.on{color:var(--acc);font-weight:700}
 .shade{position:fixed;inset:0;background:#0007;z-index:20;display:flex;align-items:flex-end;justify-content:center}
-.sheet{background:var(--bg);width:100%;max-height:94%;overflow:auto;border-radius:24px 24px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom));animation:up .18s ease-out}
-@keyframes up{from{transform:translateY(30px);opacity:.4}}
-.calc{background:var(--accl);color:var(--acc);border-radius:14px;padding:11px 13px;margin:12px 0;font-size:14px;display:grid;gap:3px}
+.sheet{background:var(--bg);width:100%;max-height:92%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;border-radius:1.5rem 1.5rem 0 0;padding:1rem 0.875rem calc(1.125rem + env(safe-area-inset-bottom));animation:up .18s ease-out}
+@keyframes up{from{transform:translateY(1.875rem);opacity:.4}}
+.calc{background:var(--accl);color:var(--acc);border-radius:0.875rem;padding:0.6875rem 0.8125rem;margin:0.75rem 0;font-size:0.875rem;display:grid;gap:0.1875rem}
 .calc b{float:right}
-.delta{font-size:12.5px;min-height:18px;margin:3px 2px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-td,th{padding:8px 4px;text-align:right;border-bottom:1px solid var(--line)}
+.delta{font-size:0.78125rem;min-height:1.125rem;margin:0.1875rem 2px}
+table{width:100%;border-collapse:collapse;font-size:0.8125rem}
+td,th{padding:0.5rem 0.25rem;text-align:right;border-bottom:1px solid var(--line)}
 td:first-child,th:first-child{text-align:left}
-th{color:var(--mut);font-weight:600;font-size:12px}
-.back{border:0;background:none;color:var(--acc);font:inherit;font-weight:650;padding:12px 0;min-height:44px}
-.empty{text-align:center;color:var(--mut);padding:36px 12px}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;z-index:30}
-.fabb{position:fixed;right:14px;bottom:76px;width:auto;border-radius:99px;padding:0 22px;box-shadow:0 6px 18px #0004;z-index:9}
+th{color:var(--mut);font-weight:600;font-size:0.75rem}
+.back{border:0;background:none;color:var(--acc);font:inherit;font-weight:650;padding:0.75rem 0;min-height:2.75rem}
+.empty{text-align:center;color:var(--mut);padding:2.25rem 0.75rem}
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:0.6875rem 1.125rem;border-radius:6.1875rem;z-index:30}
+.fabb{position:fixed;right:0.875rem;bottom:4.75rem;width:auto;border-radius:6.1875rem;padding:0 1.375rem;box-shadow:0 0.375rem 1.125rem #0004;z-index:9}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style></head><body>
 <div id="app"></div><nav id="nav"></nav>
@@ -116,7 +121,7 @@ const act=id=>{touch(id);if(S.tab=='shop')buyForm(id);else{S.pid=id;render();scr
 const touch=async id=>{const p=P.find(x=>x.id==id);if(p){p.lastUsed=now();await put('products',p)}};
 /* views */
 function home(){const a=agg(yr(yNow()));body=()=>grid(byName(filt()));
- return `<h1>Price Book</h1><div class="hero"><small>${yNow()} purchases</small><div class="row" style="margin-top:6px"><div><small>Total purchase</small><b>${fm(a.c)}</b></div><div><small>Exp. sales</small><b>${fm(a.s)}</b></div><div><small>Exp. profit</small><b>${fm(a.p)}</b></div><div><small>Margin</small><b>${a.m.toFixed(1)}%</b></div></div></div>${search}<div id="list">${body()}</div>${addBtn}`}
+ return `<h1>Price Book</h1><div class="hero"><small>${yNow()} purchases</small><div class="row" style="margin-top:0.375rem"><div><small>Total purchase</small><b>${fm(a.c)}</b></div><div><small>Exp. sales</small><b>${fm(a.s)}</b></div><div><small>Exp. profit</small><b>${fm(a.p)}</b></div><div><small>Margin</small><b>${a.m.toFixed(1)}%</b></div></div></div>${search}<div id="list">${body()}</div>${addBtn}`}
 function products(){body=()=>grid(byName(filt()));const n=P.filter(p=>p.archived).length;
  return `<h1>Products</h1>${search}<div class="chips"><button class="chip ${S.chip?'':'on'}" onclick="S.chip='';render()">Active</button><button class="chip ${S.chip?'on':''}" onclick="S.chip='arch';render()">Archived (${n})</button></div><div id="list">${body()}</div>${addBtn}`}
 function shop(){body=()=>{const L=filt(),q=S.q.trim();if(q)return grid(byName(L));
@@ -124,30 +129,30 @@ function shop(){body=()=>{const L=filt(),q=S.q.trim();if(q)return grid(byName(L)
  return (f.length?`<h2>★ Favorites</h2>${grid(f)}`:'')+(r.length?`<h2>Recently used</h2>${grid(r)}`:'')+(rest.length?`<h2>All products</h2>${grid(rest)}`:'')||grid([])};
  return `<h1>Shopping</h1>${search}<div id="list">${body()}</div>`}
 function detail(){const p=P.find(x=>x.id==S.pid);if(!p){S.pid=null;return home()}const h=hist(p.id),l=h[0],pv=h[1];
- return `<button class="back" onclick="S.pid=null;render()">‹ Back</button><div class="im" style="border-radius:22px;aspect-ratio:1/.7;font-size:64px">${imgOf(p)}</div>
- <div style="display:flex;justify-content:space-between;align-items:center"><h1>${esc(p.name)}</h1><button class="chip" onclick="fav('${p.id}')" style="font-size:20px">${p.favorite?'★':'☆'}</button></div>
- <div class="kv"><div class="hl"><small>Previous buy price</small><b>${l?fm(l.buyPrice):'—'}</b></div><div class="hl"><small>Previous sell price</small><b>${l?fm(l.sellPrice):'—'}</b></div><div><small>Previous quantity</small><b>${l?l.quantity:'—'}</b></div><div><small>Purchase date</small><b style="font-size:17px">${l?fd(l.date):'—'}</b></div></div>
- ${pv?`<div class="box" style="margin-top:10px;padding:12px 14px"><small style="color:var(--mut)">Buy price change</small><br><b>${fm(pv.buyPrice)} → ${fm(l.buyPrice)}</b> &nbsp;${delta(pv.buyPrice,l.buyPrice)}<div style="height:8px"></div><small style="color:var(--mut)">Sell price change</small><br><b>${fm(pv.sellPrice)} → ${fm(l.sellPrice)}</b> &nbsp;${delta(pv.sellPrice,l.sellPrice)}</div>`:''}
- <div style="height:12px"></div><button class="btn big" onclick="buyForm('${p.id}')">+ ADD NEW PURCHASE</button>
- <h2>Price history</h2><div class="box">${h.map(r=>`<div class="hist" onclick="buyForm('${p.id}','${r.id}')"><div class="r"><b>${fd(r.date)}</b><span>Qty ${r.quantity}</span></div><div class="r" style="color:var(--mut)"><span>Buy ${fm(r.buyPrice)} | Sell ${fm(r.sellPrice)}</span><span>Profit ${fm(r.expectedProfit)}</span></div></div>`).join('')||'<div class="empty">No purchases yet.</div>'}</div><small style="color:var(--mut);margin:0 4px">Tap a record to edit or delete it.</small>
- <button class="btn sec" style="margin-top:14px" onclick="prodForm('${p.id}')">Edit product</button>`}
+ return `<button class="back" onclick="S.pid=null;render()">‹ Back</button><div class="im" style="border-radius:1.375rem;aspect-ratio:1/.7;font-size:4rem">${imgOf(p)}</div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><h1>${esc(p.name)}</h1><button class="chip" onclick="fav('${p.id}')" style="font-size:1.25rem">${p.favorite?'★':'☆'}</button></div>
+ <div class="kv"><div class="hl"><small>Previous buy price</small><b>${l?fm(l.buyPrice):'—'}</b></div><div class="hl"><small>Previous sell price</small><b>${l?fm(l.sellPrice):'—'}</b></div><div><small>Previous quantity</small><b>${l?l.quantity:'—'}</b></div><div><small>Purchase date</small><b style="font-size:1.0625rem">${l?fd(l.date):'—'}</b></div></div>
+ ${pv?`<div class="box" style="margin-top:0.625rem;padding:0.75rem 0.875rem"><small style="color:var(--mut)">Buy price change</small><br><b>${fm(pv.buyPrice)} → ${fm(l.buyPrice)}</b> &nbsp;${delta(pv.buyPrice,l.buyPrice)}<div style="height:0.5rem"></div><small style="color:var(--mut)">Sell price change</small><br><b>${fm(pv.sellPrice)} → ${fm(l.sellPrice)}</b> &nbsp;${delta(pv.sellPrice,l.sellPrice)}</div>`:''}
+ <div style="height:0.75rem"></div><button class="btn big" onclick="buyForm('${p.id}')">+ ADD NEW PURCHASE</button>
+ <h2>Price history</h2><div class="box">${h.map(r=>`<div class="hist" onclick="buyForm('${p.id}','${r.id}')"><div class="r"><b>${fd(r.date)}</b><span>Qty ${r.quantity}</span></div><div class="r" style="color:var(--mut)"><span>Buy ${fm(r.buyPrice)} | Sell ${fm(r.sellPrice)}</span><span>Profit ${fm(r.expectedProfit)}</span></div></div>`).join('')||'<div class="empty">No purchases yet.</div>'}</div><small style="color:var(--mut);margin:0 0.25rem">Tap a record to edit or delete it.</small>
+ <button class="btn sec" style="margin-top:0.875rem" onclick="prodForm('${p.id}')">Edit product</button>`}
 function summary(){const y=S.year,rs=yr(y),a=agg(rs),by={};rs.forEach(r=>(by[r.productId]??=[]).push(r));
  const rows=Object.entries(by).map(([id,x])=>({n:P.find(p=>p.id==id)?.name||'Deleted',...agg(x)})).sort((a,b)=>S.sort=='n'?a.n.localeCompare(b.n):b[S.sort]-a[S.sort]);
  const sel=(v,t)=>`<option value="${v}" ${S.sort==v?'selected':''}>${t}</option>`;
  return `<h1>Purchase Summary</h1><div class="chips">${years().map(v=>`<button class="chip ${v==y?'on':''}" onclick="S.year=${v};render()">${v}</button>`).join('')}</div>
- <div class="kv"><div class="hl" style="grid-column:span 2"><small>Total purchase amount</small><b style="font-size:30px">${fm(a.c)}</b></div><div><small>Expected sales</small><b>${fm(a.s)}</b></div><div><small>Expected profit</small><b>${fm(a.p)}</b></div><div><small>Margin</small><b>${a.m.toFixed(1)}%</b></div><div><small>Quantity purchased</small><b>${a.q.toLocaleString('en-IN')}</b></div></div>
+ <div class="kv"><div class="hl" style="grid-column:span 2"><small>Total purchase amount</small><b style="font-size:1.875rem">${fm(a.c)}</b></div><div><small>Expected sales</small><b>${fm(a.s)}</b></div><div><small>Expected profit</small><b>${fm(a.p)}</b></div><div><small>Margin</small><b>${a.m.toFixed(1)}%</b></div><div><small>Quantity purchased</small><b>${a.q.toLocaleString('en-IN')}</b></div></div>
  <h2>By product</h2><select onchange="S.sort=this.value;render()">${sel('c','Sort: Purchase amount')}${sel('q','Sort: Quantity')}${sel('s','Sort: Expected sales')}${sel('p','Sort: Expected profit')}${sel('n','Sort: Name')}</select>
- <div class="box" style="margin-top:10px;overflow-x:auto"><table><tr><th>Product</th><th>Qty</th><th>Purchase</th><th>Sales</th><th>Profit</th></tr>${rows.map(r=>`<tr><td>${esc(r.n)}</td><td>${r.q}</td><td>${fm(r.c)}</td><td>${fm(r.s)}</td><td>${fm(r.p)}</td></tr>`).join('')||`<tr><td colspan="5" class="empty">No purchases in ${y}</td></tr>`}</table></div>
- <h2>Yearly history</h2>${years().map(v=>{const b=agg(yr(v));return `<div class="box" style="padding:12px 14px"><b style="font-size:17px">${v}</b><div style="margin-top:4px;color:var(--mut)">Purchased: <b style="color:var(--ink)">${b.q.toLocaleString('en-IN')} items</b><br>Spent: <b style="color:var(--ink)">${fm(b.c)}</b><br>Expected sales: <b style="color:var(--ink)">${fm(b.s)}</b><br>Expected profit: <b style="color:var(--ink)">${fm(b.p)}</b></div></div>`}).join('')}`}
-function settings(){return `<h1>Settings</h1><div class="box" style="padding:14px"><b>Backup</b><p style="color:var(--mut);margin:4px 0 12px">Your data lives only on this phone. Export a copy regularly.</p><div class="two"><button class="btn" onclick="expJSON()">Export backup</button><button class="btn sec" onclick="$('#imp').click()">Import backup</button></div><button class="btn sec" style="margin-top:10px" onclick="expCSV()">Export CSV</button><input id="imp" type="file" accept=".json,.csv" hidden onchange="imp(this.files[0])"></div><div class="box" style="padding:14px"><b>${P.length}</b> products · <b>${R.length}</b> purchase records<br><small style="color:var(--mut)">Importing replaces the data on this phone.</small></div>`}
+ <div class="box" style="margin-top:0.625rem;overflow-x:auto"><table><tr><th>Product</th><th>Qty</th><th>Purchase</th><th>Sales</th><th>Profit</th></tr>${rows.map(r=>`<tr><td>${esc(r.n)}</td><td>${r.q}</td><td>${fm(r.c)}</td><td>${fm(r.s)}</td><td>${fm(r.p)}</td></tr>`).join('')||`<tr><td colspan="5" class="empty">No purchases in ${y}</td></tr>`}</table></div>
+ <h2>Yearly history</h2>${years().map(v=>{const b=agg(yr(v));return `<div class="box" style="padding:0.75rem 0.875rem"><b style="font-size:1.0625rem">${v}</b><div style="margin-top:0.25rem;color:var(--mut)">Purchased: <b style="color:var(--ink)">${b.q.toLocaleString('en-IN')} items</b><br>Spent: <b style="color:var(--ink)">${fm(b.c)}</b><br>Expected sales: <b style="color:var(--ink)">${fm(b.s)}</b><br>Expected profit: <b style="color:var(--ink)">${fm(b.p)}</b></div></div>`}).join('')}`}
+function settings(){return `<h1>Settings</h1><div class="box" style="padding:0.875rem"><b>Backup</b><p style="color:var(--mut);margin:0.25rem 0 0.75rem">Your data lives only on this phone. Export a copy regularly.</p><div class="two"><button class="btn" onclick="expJSON()">Export backup</button><button class="btn sec" onclick="$('#imp').click()">Import backup</button></div><button class="btn sec" style="margin-top:0.625rem" onclick="expCSV()">Export CSV</button><input id="imp" type="file" accept=".json,.csv" hidden onchange="imp(this.files[0])"></div><div class="box" style="padding:0.875rem"><b>${P.length}</b> products · <b>${R.length}</b> purchase records<br><small style="color:var(--mut)">Importing replaces the data on this phone.</small></div>`}
 /* forms */
 const sheet=h=>{const s=document.createElement('div');s.className='shade';s.innerHTML=`<div class="sheet">${h}</div>`;s.onclick=e=>{if(e.target==s)s.remove()};document.body.appendChild(s);return s};
 const close=()=>document.querySelector('.shade')?.remove();
 function buyForm(pid,rid){const p=P.find(x=>x.id==pid),h=hist(pid),r=rid?R.find(x=>x.id==rid):null,pv=r?h[h.indexOf(r)+1]:h[0];
- const s=sheet(`<div style="display:flex;gap:12px;align-items:center"><div class="im" style="width:60px;height:60px;border-radius:14px;aspect-ratio:auto;font-size:24px">${imgOf(p)}</div><b style="font-size:18px">${esc(p.name)}</b></div>
- <div class="two" style="margin-top:12px"><div class="kv" style="grid-column:span 2"><div><small>Previous buy</small><b>${pv?fm(pv.buyPrice):'—'}</b></div><div><small>Previous sell</small><b>${pv?fm(pv.sellPrice):'—'}</b></div></div></div>
- <div class="two"><div><label>Current buy ₹</label><input id="b" type="number" inputmode="decimal" value="${r?r.buyPrice:''}" style="font-size:24px;font-weight:700"><div class="delta" id="db"></div></div><div><label>Current sell ₹</label><input id="s" type="number" inputmode="decimal" value="${r?r.sellPrice:(pv?pv.sellPrice:'')}" style="font-size:24px;font-weight:700"><div class="delta" id="ds"></div></div></div>
- <div class="two"><div><label>Quantity</label><input id="q" type="number" inputmode="numeric" value="${r?r.quantity:(pv?pv.quantity:'')}" style="font-size:24px;font-weight:700"></div><div><label>Date</label><input id="d" type="date" value="${r?r.date:today()}"></div></div>
+ const s=sheet(`<div style="display:flex;gap:0.75rem;align-items:center"><div class="im" style="width:3.75rem;height:3.75rem;border-radius:0.875rem;aspect-ratio:auto;font-size:1.5rem">${imgOf(p)}</div><b style="font-size:1.125rem">${esc(p.name)}</b></div>
+ <div class="two" style="margin-top:0.75rem"><div class="kv" style="grid-column:span 2"><div><small>Previous buy</small><b>${pv?fm(pv.buyPrice):'—'}</b></div><div><small>Previous sell</small><b>${pv?fm(pv.sellPrice):'—'}</b></div></div></div>
+ <div class="two"><div><label>Current buy ₹</label><input id="b" type="number" inputmode="decimal" value="${r?r.buyPrice:''}" style="font-size:1.5rem;font-weight:700"><div class="delta" id="db"></div></div><div><label>Current sell ₹</label><input id="s" type="number" inputmode="decimal" value="${r?r.sellPrice:(pv?pv.sellPrice:'')}" style="font-size:1.5rem;font-weight:700"><div class="delta" id="ds"></div></div></div>
+ <div class="two"><div><label>Quantity</label><input id="q" type="number" inputmode="numeric" value="${r?r.quantity:(pv?pv.quantity:'')}" style="font-size:1.5rem;font-weight:700"></div><div><label>Date</label><input id="d" type="date" value="${r?r.date:today()}"></div></div>
  <div class="calc"><span>Total purchase <b id="c1">₹0</b></span><span>Expected sales <b id="c2">₹0</b></span><span>Expected profit <b id="c3">₹0</b></span></div>
  <button class="btn big" id="sv">${r?'SAVE CHANGES':'SAVE PURCHASE'}</button>${r?'<button class="btn red" id="dl">Delete this record</button>':''}`);
  const q=x=>s.querySelector(x),calc=()=>{const n=+q('#q').value,b=+q('#b').value,sl=+q('#s').value;q('#c1').textContent=fm(n*b);q('#c2').textContent=fm(n*sl);q('#c3').textContent=fm(n*sl-n*b);q('#db').innerHTML=pv&&b?delta(pv.buyPrice,b):'';q('#ds').innerHTML=pv&&sl?delta(pv.sellPrice,sl):''};
@@ -155,12 +160,12 @@ function buyForm(pid,rid){const p=P.find(x=>x.id==pid),h=hist(pid),r=rid?R.find(
  q('#sv').onclick=async()=>{const o={id:r?r.id:uid(),productId:pid,date:q('#d').value||today(),quantity:+q('#q').value,buyPrice:+q('#b').value,sellPrice:+q('#s').value,createdAt:r?r.createdAt:now(),updatedAt:now()};if(!(o.quantity>0&&o.buyPrice>0&&o.sellPrice>=0&&q('#s').value!==''))return toast('Enter buy, sell and quantity');await put('purchases',mk(o));p.lastUsed=now();p.updatedAt=now();await put('products',p);await load();close();toast('Saved');render()};
  if(r)q('#dl').onclick=async()=>{if(!confirm('Delete this purchase record?'))return;await del('purchases',r.id);await load();close();render()}}
 function prodForm(id){const p=P.find(x=>x.id==id)||{};let img=p.image||'';
- const s=sheet(`<h2 style="margin-top:0">${id?'Edit product':'Add product'}</h2><div style="display:flex;gap:12px;align-items:center"><div class="im" id="pv" style="width:92px;height:92px;border-radius:18px;aspect-ratio:auto;font-size:30px;flex:none">${p.image?`<img src="${p.image}">`:'📷'}</div><div class="two" style="flex:1"><button class="btn sec" onclick="f1.click()">Camera</button><button class="btn sec" onclick="f2.click()">Gallery</button></div></div>
+ const s=sheet(`<h2 style="margin-top:0">${id?'Edit product':'Add product'}</h2><div style="display:flex;gap:0.75rem;align-items:center"><div class="im" id="pv" style="width:5.75rem;height:5.75rem;border-radius:1.125rem;aspect-ratio:auto;font-size:1.875rem;flex:none">${p.image?`<img src="${p.image}">`:'📷'}</div><div class="two" style="flex:1"><button class="btn sec" onclick="f1.click()">Camera</button><button class="btn sec" onclick="f2.click()">Gallery</button></div></div>
  <input id="f1" type="file" accept="image/*" capture="environment" hidden><input id="f2" type="file" accept="image/*" hidden>
  <label>Product name</label><input id="n" value="${esc(p.name)}">
  ${id?'':`<div class="three"><div><label>Buy ₹</label><input id="b" type="number" inputmode="decimal"></div><div><label>Sell ₹</label><input id="s" type="number" inputmode="decimal"></div><div><label>Quantity</label><input id="q" type="number" inputmode="numeric"></div></div>`}
- <div style="height:14px"></div><button class="btn big" id="sv">${id?'SAVE':'ADD PRODUCT'}</button>
- ${id?`<button class="btn sec" style="margin-top:10px" id="ar">${p.archived?'Restore product':'Archive product'}</button><button class="btn red" id="dl">Delete product and history</button>`:''}`);
+ <div style="height:0.875rem"></div><button class="btn big" id="sv">${id?'SAVE':'ADD PRODUCT'}</button>
+ ${id?`<button class="btn sec" style="margin-top:0.625rem" id="ar">${p.archived?'Restore product':'Archive product'}</button><button class="btn red" id="dl">Delete product and history</button>`:''}`);
  const q=x=>s.querySelector(x);['#f1','#f2'].forEach(i=>q(i).onchange=async e=>{if(e.target.files[0]){img=await squeeze(e.target.files[0]);q('#pv').innerHTML=`<img src="${img}">`}});
  q('#sv').onclick=async()=>{const n=q('#n').value.trim();if(!n)return toast('Enter a product name');const pid=p.id||uid();
   if(!id){const b=+q('#b').value,sl=+q('#s').value,qt=+q('#q').value;if(b||sl||qt){if(!(b>0&&qt>0&&q('#s').value!==''))return toast('Fill buy, sell and quantity, or leave all empty');await put('purchases',mk({id:uid(),productId:pid,date:today(),quantity:qt,buyPrice:b,sellPrice:sl,createdAt:now(),updatedAt:now()}))}}
@@ -179,9 +184,7 @@ async function imp(f){if(!f)return;try{const t=await f.text();let ps,rs;
   for(const c of parseCSV(t).slice(1)){const [n,d,q,b,s]=c;if(!n||!d)continue;let p=m.get(n.toLowerCase());if(!p){p={id:uid(),name:n,image:'',favorite:false,createdAt:now(),updatedAt:now()};m.set(n.toLowerCase(),p);ps.push(p)}rs.push(mk({id:uid(),productId:p.id,date:d,quantity:+q,buyPrice:+b,sellPrice:+s,createdAt:now(),updatedAt:now()}))}}
  else{const d=JSON.parse(t);if(!Array.isArray(d.products)||!Array.isArray(d.purchases))throw 0;if(!confirm('Replace all data on this phone with this backup?'))return;ps=d.products;rs=d.purchases}
  await clr('products');await clr('purchases');for(const p of ps)await put('products',p);for(const r of rs)await put('purchases',r);await load();toast('Backup restored');render()}catch(e){toast('Not a valid backup file')}}
-/* fill the screen: if Chrome lays the page out wider than a phone (desktop-site mode), scale it to fit */
-const fit=()=>{const c=matchMedia('(pointer:coarse)').matches,w=innerWidth/(parseFloat(document.documentElement.style.zoom)||1),z=c&&w>480?w/412:1;document.documentElement.style.zoom=z>1?z:''};
-fit();addEventListener('resize',fit);
+addEventListener('focusin',e=>{if(e.target.matches('input'))setTimeout(()=>e.target.scrollIntoView({block:'center',behavior:'smooth'}),300)});
 /* shell */
 const tabs=[['home','⌂','Home'],['products','▦','Products'],['shop','✎','Shopping'],['sum','∑','Summary'],['set','⚙','Settings']];
 function render(){$('#nav').innerHTML=tabs.map(([k,i,t])=>`<button class="${S.tab==k?'on':''}" onclick="go('${k}')"><i>${i}</i>${t}</button>`).join('');

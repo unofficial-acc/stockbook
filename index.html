@@ -10,9 +10,10 @@
 :root{--bg:#EEF1EF;--card:#fff;--ink:#16211D;--mut:#6B7872;--line:#DDE3E0;--acc:#0E5E50;--accl:#DCEDE8;--up:#C2410C;--dn:#15803D}
 @media(prefers-color-scheme:dark){:root{--bg:#101614;--card:#1A2320;--ink:#EAF0ED;--mut:#93A39C;--line:#2B3733;--acc:#4FC3A9;--accl:#1E3A33;--up:#FB923C;--dn:#4ADE80}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0}
+html,body{margin:0;width:100%;overflow-x:hidden}
 body{background:var(--bg);color:var(--ink);font:15px/1.35 system-ui,Roboto,sans-serif;padding-top:env(safe-area-inset-top)}
-#app{max-width:560px;margin:0 auto;padding:0 12px 100px}
+#app{width:100%;margin:0 auto;padding:0 12px 100px}
+@media(pointer:fine){#app{max-width:560px}.sheet{max-width:560px}}
 h1{font-size:22px;margin:14px 2px 10px;letter-spacing:-.4px}
 h2{font-size:16px;margin:18px 2px 8px}
 .sticky{position:sticky;top:env(safe-area-inset-top,0);background:var(--bg);padding:8px 0;z-index:5}
@@ -56,7 +57,7 @@ nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-si
 nav button i{display:block;font-style:normal;font-size:21px}
 nav button.on{color:var(--acc);font-weight:700}
 .shade{position:fixed;inset:0;background:#0007;z-index:20;display:flex;align-items:flex-end;justify-content:center}
-.sheet{background:var(--bg);width:100%;max-width:560px;max-height:94%;overflow:auto;border-radius:24px 24px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom));animation:up .18s ease-out}
+.sheet{background:var(--bg);width:100%;max-height:94%;overflow:auto;border-radius:24px 24px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom));animation:up .18s ease-out}
 @keyframes up{from{transform:translateY(30px);opacity:.4}}
 .calc{background:var(--accl);color:var(--acc);border-radius:14px;padding:11px 13px;margin:12px 0;font-size:14px;display:grid;gap:3px}
 .calc b{float:right}
@@ -178,6 +179,9 @@ async function imp(f){if(!f)return;try{const t=await f.text();let ps,rs;
   for(const c of parseCSV(t).slice(1)){const [n,d,q,b,s]=c;if(!n||!d)continue;let p=m.get(n.toLowerCase());if(!p){p={id:uid(),name:n,image:'',favorite:false,createdAt:now(),updatedAt:now()};m.set(n.toLowerCase(),p);ps.push(p)}rs.push(mk({id:uid(),productId:p.id,date:d,quantity:+q,buyPrice:+b,sellPrice:+s,createdAt:now(),updatedAt:now()}))}}
  else{const d=JSON.parse(t);if(!Array.isArray(d.products)||!Array.isArray(d.purchases))throw 0;if(!confirm('Replace all data on this phone with this backup?'))return;ps=d.products;rs=d.purchases}
  await clr('products');await clr('purchases');for(const p of ps)await put('products',p);for(const r of rs)await put('purchases',r);await load();toast('Backup restored');render()}catch(e){toast('Not a valid backup file')}}
+/* fill the screen: if Chrome lays the page out wider than a phone (desktop-site mode), scale it to fit */
+const fit=()=>{const c=matchMedia('(pointer:coarse)').matches,w=innerWidth/(parseFloat(document.documentElement.style.zoom)||1),z=c&&w>480?w/412:1;document.documentElement.style.zoom=z>1?z:''};
+fit();addEventListener('resize',fit);
 /* shell */
 const tabs=[['home','⌂','Home'],['products','▦','Products'],['shop','✎','Shopping'],['sum','∑','Summary'],['set','⚙','Settings']];
 function render(){$('#nav').innerHTML=tabs.map(([k,i,t])=>`<button class="${S.tab==k?'on':''}" onclick="go('${k}')"><i>${i}</i>${t}</button>`).join('');
